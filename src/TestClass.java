@@ -7,5 +7,6 @@ public class TestClass {
     int secondDummyVariable=0;
     int thirdDummyvariable=0;
     int fourthDummyVariable=0;
+    int fifthdummy=0;
   }
 }
