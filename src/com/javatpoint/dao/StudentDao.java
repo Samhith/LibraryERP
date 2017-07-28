@@ -17,11 +17,11 @@ public class StudentDao {
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("insert into e_student values(std_seq.nextval,?,?,?,?,?,?)");
+			PreparedStatement ps=con.prepareStatement("insert into e_student values(std_seq.nextval,?,?,?,?,?)");
 			ps.setString(1,bean.getName());
 			ps.setString(2,bean.getEmail());
 			ps.setLong(3,bean.getMobile());
-			ps.setString(1,bean.getUName());
+			ps.setString(4,bean.getUName());
 			ps.setString(5,bean.getPassword());
 		
 			status=ps.executeUpdate();
