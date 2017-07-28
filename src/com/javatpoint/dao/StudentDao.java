@@ -7,19 +7,23 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javatpoint.beans.LibrarianBean;
+import com.javatpoint.beans.StudentBean;
 
-public class LibrarianDao {
 
-	public static int save(LibrarianBean bean){
+
+public class StudentDao {
+
+	public static int save(StudentBean bean){
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("insert into e_librarian values(lib_seq.nextval,?,?,?,?)");
+			PreparedStatement ps=con.prepareStatement("insert into e_student values(std_seq.nextval,?,?,?,?,?,?)");
 			ps.setString(1,bean.getName());
 			ps.setString(2,bean.getEmail());
-			ps.setString(3,bean.getPassword());
-			ps.setLong(4,bean.getMobile());
+			ps.setLong(3,bean.getMobile());
+			ps.setString(1,bean.getUName());
+			ps.setString(5,bean.getPassword());
+		
 			status=ps.executeUpdate();
 			con.close();
 			
@@ -27,15 +31,16 @@ public class LibrarianDao {
 		
 		return status;
 	}
-	public static int update(LibrarianBean bean){
+	public static int update(StudentBean bean){
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("update e_librarian set name=?,email=?,password=?,mobile=? where id=?");
+			PreparedStatement ps=con.prepareStatement("update e_student set name=?,email=?,mobile=?,uname=?,password=? where id=?");
 			ps.setString(1,bean.getName());
 			ps.setString(2,bean.getEmail());
-			ps.setString(3,bean.getPassword());
-			ps.setLong(4,bean.getMobile());
+			ps.setLong(3,bean.getMobile());
+			ps.setString(1,bean.getUName());
+			ps.setString(5,bean.getPassword());
 			ps.setInt(5,bean.getId());
 			status=ps.executeUpdate();
 			con.close();
@@ -44,19 +49,20 @@ public class LibrarianDao {
 		
 		return status;
 	}
-	public static List<LibrarianBean> view(){
-		List<LibrarianBean> list=new ArrayList<LibrarianBean>();
+	public static List<StudentBean> view(){
+		List<StudentBean> list=new ArrayList<StudentBean>();
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("select * from e_librarian");
+			PreparedStatement ps=con.prepareStatement("select * from e_student");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
-				LibrarianBean bean=new LibrarianBean();
+				StudentBean bean=new StudentBean();
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setEmail(rs.getString("email"));
-				bean.setPassword(rs.getString("password"));
 				bean.setMobile(rs.getLong("mobile"));
+				bean.setName(rs.getString("uname"));
+				bean.setPassword(rs.getString("password"));
 				list.add(bean);
 			}
 			con.close();
@@ -65,8 +71,8 @@ public class LibrarianDao {
 		
 		return list;
 	}
-	public static LibrarianBean viewById(int id){
-		LibrarianBean bean=new LibrarianBean();
+	public static StudentBean viewById(int id){
+		StudentBean bean=new StudentBean();
 		try{
 			Connection con=DB.getCon();
 			PreparedStatement ps=con.prepareStatement("select * from e_librarian where id=?");
@@ -76,8 +82,9 @@ public class LibrarianDao {
 				bean.setId(rs.getInt(1));
 				bean.setName(rs.getString(2));
 				bean.setEmail(rs.getString(3));
-				bean.setPassword(rs.getString(4));
-				bean.setMobile(rs.getLong(5));
+				bean.setMobile(rs.getLong(4));
+				bean.setName(rs.getString(5));
+				bean.setPassword(rs.getString(6));
 			}
 			con.close();
 			
@@ -89,7 +96,7 @@ public class LibrarianDao {
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("delete from e_librarian where id=?");
+			PreparedStatement ps=con.prepareStatement("delete from e_student where id=?");
 			ps.setInt(1,id);
 			status=ps.executeUpdate();
 			con.close();
@@ -103,7 +110,7 @@ public class LibrarianDao {
 		boolean status=false;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("select * from e_librarian where email=? and password=?");
+			PreparedStatement ps=con.prepareStatement("select * from e_student where email=? and password=?");
 			ps.setString(1,email);
 			ps.setString(2,password);
 			ResultSet rs=ps.executeQuery();
