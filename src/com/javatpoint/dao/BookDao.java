@@ -18,7 +18,7 @@ public class BookDao {
 		try{
 			Connection con=DB.getCon();
 			PreparedStatement ps=con.prepareStatement("insert into e_book values(?,?,?,?,?,?)");
-			ps.setString(1,bean.getCallno());
+			ps.setInt(1,bean.getCallno());
 			ps.setString(2,bean.getName());
 			ps.setString(3,bean.getAuthor());
 			ps.setString(4,bean.getPublisher());
@@ -39,7 +39,7 @@ public class BookDao {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				BookBean bean=new BookBean();
-				bean.setCallno(rs.getString("callno"));
+				bean.setCallno(rs.getInt("callno"));
 				bean.setName(rs.getString("name"));
 				bean.setAuthor(rs.getString("author"));
 				bean.setPublisher(rs.getString("publisher"));
@@ -54,6 +54,34 @@ public class BookDao {
 		
 		return list;
 	}
+	
+	
+	public static List<BookBean> viewByName(String name){
+		List<BookBean> list=new ArrayList<BookBean>();
+		try{
+			Connection con=DB.getCon();
+			PreparedStatement ps=con.prepareStatement("select * from e_book where name like ?");
+			ps.setString(1, name+"%");
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				BookBean bean=new BookBean();
+				bean.setCallno(rs.getInt("callno"));
+				bean.setName(rs.getString("name"));
+				bean.setAuthor(rs.getString("author"));
+				bean.setPublisher(rs.getString("publisher"));
+				bean.setQuantity(rs.getInt("quantity"));
+				bean.setIssued(rs.getInt("issued"));
+				
+				list.add(bean);
+			}
+			con.close();
+			
+		}catch(Exception e){System.out.println(e);}
+		
+		return list;
+	}
+	
+	
 	public static int delete(String callno){
 		int status=0;
 		try{

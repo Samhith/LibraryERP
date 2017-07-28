@@ -1,13 +1,14 @@
 package com.javatpoint.beans;
 
 public class BookBean {
-private String callno,name,author,publisher;
+private int callno;
+private String name,author,publisher;
 private int quantity,issued;
 public BookBean() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public BookBean(String callno, String name, String author, String publisher, int quantity) {
+public BookBean(int callno, String name, String author, String publisher, int quantity) {
 	super();
 	this.callno = callno;
 	this.name = name;
@@ -15,10 +16,10 @@ public BookBean(String callno, String name, String author, String publisher, int
 	this.publisher = publisher;
 	this.quantity = quantity;
 }
-public String getCallno() {
+public int getCallno() {
 	return callno;
 }
-public void setCallno(String callno) {
+public void setCallno(int callno) {
 	this.callno = callno;
 }
 public String getName() {
