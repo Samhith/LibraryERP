@@ -34,7 +34,7 @@ public class StudentLogin extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("email",student_email);
 			
-			//request.getRequestDispatcher("navstudent.html").include(request, response);
+			request.getRequestDispatcher("navstudent.html").include(request, response);
 			request.getRequestDispatcher("studentcarousel.html").include(request, response);
 			
 		}else{
