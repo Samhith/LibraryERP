@@ -38,8 +38,8 @@ public class LibrarianLogin extends HttpServlet {
 		}else{
 			request.getRequestDispatcher("navhome.html").include(request, response);
 			out.println("<div class='container'>");
-			out.println("<h3>Username or password error</h3>");
-			request.getRequestDispatcher("librarianloginform.html").include(request, response);
+			out.println("<center><p><font color='red'>Username or Password error</font></p></center>");
+			request.getRequestDispatcher("librarian.html").include(request, response);
 			out.println("</div>");
 		}
 		

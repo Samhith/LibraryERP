@@ -15,7 +15,7 @@ public class LibrarianDao {
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("insert into e_librarian(name,email,password,mobile) values(?,?,?,?)");
+			PreparedStatement ps=con.prepareStatement("insert into e_librarian values(lib_seq.nextval,?,?,?,?)");
 			ps.setString(1,bean.getName());
 			ps.setString(2,bean.getEmail());
 			ps.setString(3,bean.getPassword());

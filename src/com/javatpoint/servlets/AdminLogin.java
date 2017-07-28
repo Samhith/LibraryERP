@@ -37,7 +37,7 @@ public class AdminLogin extends HttpServlet {
 			request.getRequestDispatcher("navhome.html").include(request, response);
 			out.println("<div class='container'>");
 			out.println("<center><p><font color='red'>Username or Password error</font></p></center>");
-			request.getRequestDispatcher("adminloginform.html").include(request, response);
+			request.getRequestDispatcher("admin.html").include(request, response);
 			out.println("</div>");
 		}
 		
