@@ -110,7 +110,7 @@ public class StudentDao {
 		boolean status=false;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("select * from e_student where email=? and password=?");
+			PreparedStatement ps=con.prepareStatement("select * from e_student where student_mail=? and password=?");
 			ps.setString(1,email);
 			ps.setString(2,password);
 			ResultSet rs=ps.executeQuery();
