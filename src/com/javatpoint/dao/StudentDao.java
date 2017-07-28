@@ -57,12 +57,14 @@ public class StudentDao {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				StudentBean bean=new StudentBean();
-				bean.setId(rs.getInt("id"));
-				bean.setName(rs.getString("name"));
-				bean.setEmail(rs.getString("email"));
-				bean.setMobile(rs.getLong("mobile"));
-				bean.setName(rs.getString("uname"));
-				bean.setPassword(rs.getString("password"));
+				bean.setId(rs.getInt(1));
+				System.out.println(rs.getInt(1));
+				bean.setName(rs.getString(2));
+				System.out.println(rs.getString(2));				
+				bean.setEmail(rs.getString(3));
+				bean.setMobile(rs.getLong(4));
+				bean.setUName(rs.getString(5));
+				bean.setPassword(rs.getString(6));
 				list.add(bean);
 			}
 			con.close();
@@ -92,12 +94,12 @@ public class StudentDao {
 		
 		return bean;
 	}
-	public static int delete(int id){
+	public static int delete(String mail){
 		int status=0;
 		try{
 			Connection con=DB.getCon();
-			PreparedStatement ps=con.prepareStatement("delete from e_student where id=?");
-			ps.setInt(1,id);
+			PreparedStatement ps=con.prepareStatement("delete from e_student where student_mail=?");
+			ps.setString(1,mail);
 			status=ps.executeUpdate();
 			con.close();
 			
